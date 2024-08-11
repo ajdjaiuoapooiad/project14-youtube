@@ -1,0 +1,53 @@
+{% extends 'youtube/base.html'%}
+{% load static %}
+
+{% block customcss %}
+<link rel='stylesheet' type='text/css' href="{% static 'post_list.css' %}">
+{% endblock customcss %}
+
+{% block content%}
+
+   
+    <div class="jumbotron bg-dark text-white h-75 mt-3">
+        <h4 class="display-3">動画を投稿してみよう！</h4>
+        <p>お気に入りの動画を投稿してみよう。</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="{% url 'youtube:create'%}" role="button">Let's Create</a>
+        </p>
+    </div>
+
+
+<div class="container mb-5">
+    <h1 class="my-5">おすすめ一覧</h1>
+    <div class="row">
+        {% for post in post_list%}
+        <div class="card bg-dark text-white col-sm-3 mb-3">
+            
+            <img class="h-75 w-100" src="{{post.thumbnail.url}}" alt="Card image">
+            <div class="card-body">
+              <a  class="text-white" href="{% url 'youtube:detail' post.pk%}">{{post.title}}</a>
+
+
+              <div class="dropdown float-right">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"></button>
+
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <a class="dropdown-item" href="{% url 'youtube:delete' post.pk%}" class="btn btn-dark">削除</a>
+                  <a class="dropdown-item" href="{% url 'youtube:update' post.pk%}" class="btn btn-dark">編集</a>
+                  <a class="dropdown-item" href="{% url 'youtube:good' post.pk%}" class="btn btn-dark">高評価{{post.good}}</a>
+                  <a class="dropdown-item" href="" class="btn btn-dark">閲覧数{{post.read}}</a>
+                </div>
+              </div>
+
+                
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+
+
+{% endblock%}   

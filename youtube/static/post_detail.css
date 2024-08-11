@@ -1,0 +1,23 @@
+body{
+    background-color: black;
+    color: white;
+   
+}
+.comment{
+    height: 200px;
+    
+}
+.youtube-text{
+    height: 200px;
+    
+}
+.youtube-channel{
+    height:200px;
+}
+
+
+
+.rounded-circle{
+    height: 75px;
+    width: 75px;
+}

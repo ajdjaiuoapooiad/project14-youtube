@@ -1,0 +1,78 @@
+{% extends 'youtube/base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link rel='stylesheet' type='text/css' href="{% static 'mypage.css' %}">
+{% endblock customcss %}
+
+{% block content%}
+
+
+
+<div class="relative ">
+
+  <p class="absolute text1">{{user.username}}</p>
+  <a href="" class="btn btn-primary absolute text2">チャンネル登録</a>
+  <img class="rounded-circle absolute" src="/media/media/image/kkrn_icon_user_1.png" alt="Circle image">
+  
+
+
+  <img class="mypage-img " src="/media/media/image/pexels-eberhardgross-640781.jpg" alt="">
+  
+
+
+</div>
+  
+
+
+<ul class="nav nav-pills nav-fill ">
+    <li class="nav-item">
+      <a class="nav-link active" href="#!">投稿一覧</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#!">いいねした動画</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#!">フォロー一覧</a>
+    </li>
+  </ul>
+
+
+<div class="container mt-5">
+  <h1 class="my-5">あなたの投稿一覧</h1>
+  <div class="row">
+    {% for post in post_list%}
+    <div class="card bg-dark text-white col-sm-3 mb-3">
+        
+        <img class="h-75 w-100" src="{{post.thumbnail.url}}" alt="Card image">
+        <div class="card-body row">
+          <a  href="{% url 'youtube:detail' post.pk%}" class="text-white">{{post.title}}</a>
+
+
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle"
+                    type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"></button>
+
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <a class="dropdown-item" href="{% url 'youtube:delete' post.pk%}" class="btn btn-dark">削除</a>
+              <a class="dropdown-item" href="{% url 'youtube:update' post.pk%}" class="btn btn-dark">編集</a>
+              <a class="dropdown-item" href="{% url 'youtube:good' post.pk%}" class="btn btn-dark">高評価{{post.good}}</a>
+              <a class="dropdown-item" href="" class="btn btn-dark">閲覧数{{post.read}}</a>
+            </div>
+          </div>
+
+            
+        </div>
+    </div>
+    {%endfor%}
+  </div>
+
+  {{user.username}}
+
+</div>
+
+
+
+{% endblock%}   
